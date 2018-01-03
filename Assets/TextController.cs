@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,5 +20,6 @@ public class TextController : MonoBehaviour {
 		{
 			text.text = "Space key was pressed.";
 		}
+
 	}
 }
