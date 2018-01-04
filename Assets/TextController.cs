@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +7,10 @@ public class TextController : MonoBehaviour {
 
 	public Text text;
 
-	private enum States {cell,wall, mirror, sheets_0, lock_0, cell_mirror, sheets_1, lock_1, lock_2, freedom};
+	private enum States {
+	cell,wall, mirror, sheets_0, lock_0, cell_mirror, sheets_1, lock_1, lock_2, corridor_0, corridor_1, corridor_2, corridor_3,
+	stairs_0, stairs_1, stairs_2, floor, closet_door, in_closet, courtyard
+	};
 
 	private States myState;
 
@@ -21,19 +24,19 @@ public class TextController : MonoBehaviour {
 	void Update ()
 	{
 		print (myState);
-		if (myState == States.cell) 			{state_cell ();} 
-		else if (myState == States.sheets_0) 	{state_sheets_0();}
-		else if (myState == States.sheets_1) 	{state_sheets_1();}
-		else if (myState == States.lock_0) 		{state_lock_0();}
-		else if (myState == States.lock_1)		{state_lock_1();}
-		else if (myState == States.lock_2)		{state_lock_2();}
-		else if (myState == States.mirror) 		{state_mirror();}
-		else if (myState == States.wall)		{state_wall();}
-		else if (myState == States.cell_mirror)	{state_cell_mirror();}
-		else if (myState == States.freedom) 	{state_freedom();}
+		if 		(myState == States.cell) 		{cell ();} 
+		else if (myState == States.sheets_0) 	{sheets_0();}
+		else if (myState == States.sheets_1) 	{sheets_1();}
+		else if (myState == States.lock_0) 		{lock_0();}
+		else if (myState == States.lock_1)		{lock_1();}
+		else if (myState == States.lock_2)		{lock_2();}
+		else if (myState == States.mirror) 		{mirror();}
+		else if (myState == States.wall)		{wall();}
+		else if (myState == States.cell_mirror)	{cell_mirror();}
+		else if (myState == States.corridor_0) 	{corridor_0();}
 	}
 
-	void state_cell ()
+	void cell ()
 	{
 		text.text =  "You're in an Elf Cage after getting kidnapped by a human. "+
 			"Your mission to retrieve the socks failed. " +
@@ -50,7 +53,7 @@ public class TextController : MonoBehaviour {
 		else if (Input.GetKeyDown (KeyCode.R)) 		{myState = States.cell;}
 	}
 
-	void state_mirror ()
+	void mirror ()
 	{
 		text.text =  "This old rusty mirror on the wall seems loose. Maybe theres something behind it? " +
 			"'T' to take mirror " +
@@ -60,7 +63,7 @@ public class TextController : MonoBehaviour {
 		else if (Input.GetKeyDown (KeyCode.W)) 		{myState = States.wall;}
 		else if (Input.GetKeyDown (KeyCode.T)) 		{myState = States.cell_mirror;}
 	}
-	void state_wall ()
+	void wall ()
 	{
 		text.text =  "You find a strong wire!" +
 			"An Elf's most favored tool. Malleable yet sturdy, can reach places unreachable by an Elf." +
@@ -72,16 +75,19 @@ public class TextController : MonoBehaviour {
 		else if (Input.GetKeyDown (KeyCode.R)) 	{myState = States.cell;}
 	
 	}
-	void state_cell_mirror ()
+	void cell_mirror ()
 	{
 		text.text =  "You gently take the mirror off the wall " +
+			"You cant stop looking at your gash, could it be infected? " +
 			"'L' to look at Lock. " +
+			"S to look at sheets." +
 			"Press 'R' to return to cell";
 		if (Input.GetKeyDown(KeyCode.L))   {myState = States.lock_1;}
 		else if (Input.GetKeyDown (KeyCode.R)) 	{myState = States.cell;}
+		else if (Input.GetKeyDown (KeyCode.S)) 	{myState = States.sheets_1;}
 	}
 
-	void state_sheets_0 ()
+	void sheets_0 ()
 	{
 		text.text =  "You can't believe you sleep in these things. " +
 			"They smell a bit of mildew and cheese, surely it's time somebody changed them!" +
@@ -89,14 +95,14 @@ public class TextController : MonoBehaviour {
 			"Press R to return to roam your cell.\n\n";
 		if (Input.GetKeyDown (KeyCode.R)) 		{myState = States.cell;}
 	}
-	void state_sheets_1 ()
+	void sheets_1 ()
 	{
 		text.text =  "Holding a mirror in your hand you notice the cut from when you tried to run away from the human" +
-			"Press R to return to roam your cell.\n\n";
+			"Press M to go back to examining the mirror.\n\n";
 		if (Input.GetKeyDown (KeyCode.R))  	 {myState = States.cell_mirror;}
 	}
 
-	void state_lock_0 ()
+	void lock_0 ()
 	{
 		text.text =  "This particular lock is one of those button combination locks. " +
 			"You remember a technique where the guy was able to guess the combination" +
@@ -106,20 +112,20 @@ public class TextController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.R)) 		  {myState = States.cell;}
 	}
 
-	void state_lock_1 ()
+	void lock_1 ()
 	{
 		text.text =  "You ever so carefully slide the mirror through the bars, and turn it " +
 			"so you can just barely see the lock." +
 			"You can just make out the fingerprints around the buttons. \n\n (The guards must have been sloppy with their lunch.) \n" +
 			"Since they don't give you hangers in prison you have to dislocate your finger in order to reach the buttons" +
-			"\n*SNAP!* Without making a sound a tears running down your face, you tap the buttons and hear a click!" +
-			"\nPress O to open or " + 
-			"R to return to roam your cell.\n\n";
-		if (Input.GetKeyDown (KeyCode.O))     	{myState = States.freedom;}
-		else if (Input.GetKeyDown (KeyCode.R))      {myState = States.cell_mirror;}
+			"\n*SNAP!* Without making a sound and tears running down your face, you tap the buttons and hear a click!" +
+			"\nPress O to open the lock or " + 
+			"M to look at yourself in the mirror.\n\n";
+		if (Input.GetKeyDown (KeyCode.O))     	{myState = States.corridor_0;}
+		else if (Input.GetKeyDown (KeyCode.M))      {myState = States.cell_mirror;}
 	}
 
-	void state_lock_2 ()
+	void lock_2 ()
 	{
 		text.text =  "You ever so carefully slide the mirror through the bars, and turn it " +
 			"so you can just barely see the lock." +
@@ -128,13 +134,15 @@ public class TextController : MonoBehaviour {
 			"*CLICK!* the door clicks open! " +
 			"Press O to open or " + 
 			"R to return to roam your cell.\n\n";
-		if (Input.GetKeyDown (KeyCode.O))     	{myState = States.freedom;}
+		if (Input.GetKeyDown (KeyCode.O))     	{myState = States.corridor_0;}
 		else if (Input.GetKeyDown (KeyCode.R))      {myState = States.cell_mirror;}
 	}
-	void state_freedom ()
+
+	void corridor_0 ()
 	{
-		text.text =  "You escaped just in time! " +
-			"Press G to go back in! Elfs love challanges!!! ";
+		text.text =  "You managed to get out, the corridor looks empty and it's actually terribly cold." + 
+			"Much much colder than the cell. Very wierd... " +
+			"Press G to go back in! Elfs love challanges! ";
 		if (Input.GetKeyDown (KeyCode.O))     	{myState = States.cell;}
 	}
 
