@@ -7,7 +7,7 @@ public class TextController : MonoBehaviour {
 
 	public Text text;
 
-	private enum States {cell, mirror, sheets_0, lock_0, cell_mirror, sheets_1, lock_1, freedom};
+	private enum States {cell,wall, mirror, sheets_0, lock_0, cell_mirror, sheets_1, lock_1, lock_2, freedom};
 
 	private States myState;
 
@@ -26,8 +26,9 @@ public class TextController : MonoBehaviour {
 		else if (myState == States.sheets_1) 	{state_sheets_1();}
 		else if (myState == States.lock_0) 		{state_lock_0();}
 		else if (myState == States.lock_1)		{state_lock_1();}
+		else if (myState == States.lock_2)		{state_lock_2();}
 		else if (myState == States.mirror) 		{state_mirror();}
-
+		else if (myState == States.wall)		{state_wall();}
 		else if (myState == States.cell_mirror)	{state_cell_mirror();}
 		else if (myState == States.freedom) 	{state_freedom();}
 	}
@@ -44,37 +45,40 @@ public class TextController : MonoBehaviour {
 			"'L' to look at Lock. " +
 			"Press 'R' to return to your cell";
 		if (Input.GetKeyDown (KeyCode.S)) 		{myState = States.sheets_0;}
+		else if (Input.GetKeyDown (KeyCode.M)) 		{myState = States.mirror;}
+		else if (Input.GetKeyDown (KeyCode.L)) 		{myState = States.lock_0;}
+		else if (Input.GetKeyDown (KeyCode.R)) 		{myState = States.cell;}
 	}
 
 	void state_mirror ()
 	{
 		text.text =  "This old rusty mirror on the wall seems loose. Maybe theres something behind it? " +
-			"'L' to look at Lock. " +
 			"'T' to take mirror " +
+			"'W' to check wall behind mirror " +
 			"Press 'R' to return to cell";
-		if (Input.GetKeyDown (KeyCode.S)) 		{myState = States.sheets_0;}
-		else if (Input.GetKeyDown (KeyCode.S)) 		{myState = States.sheets_0;}
+		if (Input.GetKeyDown (KeyCode.R)) 		{myState = States.cell;}
+		else if (Input.GetKeyDown (KeyCode.W)) 		{myState = States.wall;}
+		else if (Input.GetKeyDown (KeyCode.T)) 		{myState = States.cell_mirror;}
 	}
 	void state_wall ()
 	{
 		text.text =  "You find a strong wire!" +
 			"An Elf's most favored tool. Malleable yet sturdy, can reach places unreachable by an Elf." +
-			"If anyone actually knew that is..."
-+			"'M' to look at Mirror. " +
+			"If anyone actually knew that is... " +
+			"Elf should thing carefull on their next move... " +
 			"'L' to look at Lock. " +
-			"'T' to take wire " +
 			"Press 'R' to return to cell";
-		if (Input.GetKeyDown (KeyCode.S)) 		{myState = States.sheets_0;}
+		if (Input.GetKeyDown (KeyCode.L)) 		{myState = States.lock_2;}
+		else if (Input.GetKeyDown (KeyCode.R)) 	{myState = States.cell;}
+	
 	}
 	void state_cell_mirror ()
 	{
-		text.text =  "This old rusty mirror on the wall seems loose. Maybe theres something behind it? " +
-			"'M' to look at Mirror. " +
+		text.text =  "You gently take the mirror off the wall " +
 			"'L' to look at Lock. " +
-			"'T' to take mirror " +
 			"Press 'R' to return to cell";
-		if (Input.GetKeyDown (KeyCode.S)) 		{myState = States.sheets_0;}
-		else if (Input.GetKeyDown(KeyCode.L))   {myState = States.lock_1;}
+		if (Input.GetKeyDown(KeyCode.L))   {myState = States.lock_1;}
+		else if (Input.GetKeyDown (KeyCode.R)) 	{myState = States.cell;}
 	}
 
 	void state_sheets_0 ()
@@ -87,8 +91,7 @@ public class TextController : MonoBehaviour {
 	}
 	void state_sheets_1 ()
 	{
-		text.text =  "Holding a mirror in your hand you notice the cut from when the SWAT team beat you down the first time" +
-			"It also doesn't make the sheets smell any better..." +
+		text.text =  "Holding a mirror in your hand you notice the cut from when you tried to run away from the human" +
 			"Press R to return to roam your cell.\n\n";
 		if (Input.GetKeyDown (KeyCode.R))  	 {myState = States.cell_mirror;}
 	}
@@ -107,26 +110,32 @@ public class TextController : MonoBehaviour {
 	{
 		text.text =  "You ever so carefully slide the mirror through the bars, and turn it " +
 			"so you can just barely see the lock." +
-			"You can just make out the fingerprints around the buttons. \n (The guards must have been sloppy with their lunch.)" +
+			"You can just make out the fingerprints around the buttons. \n\n (The guards must have been sloppy with their lunch.) \n" +
 			"Since they don't give you hangers in prison you have to dislocate your finger in order to reach the buttons" +
-			"*SNAP!* Without making a sound a tears running down your face, you tap the buttons and hear a click!" +
-			"Press O to open or " + 
+			"\n*SNAP!* Without making a sound a tears running down your face, you tap the buttons and hear a click!" +
+			"\nPress O to open or " + 
 			"R to return to roam your cell.\n\n";
 		if (Input.GetKeyDown (KeyCode.O))     	{myState = States.freedom;}
 		else if (Input.GetKeyDown (KeyCode.R))      {myState = States.cell_mirror;}
 	}
 
-	void state_freedom ()
+	void state_lock_2 ()
 	{
 		text.text =  "You ever so carefully slide the mirror through the bars, and turn it " +
 			"so you can just barely see the lock." +
 			"You can just make out the fingerprints around the buttons. \n (The guards must have been sloppy with their lunch.)" +
-			"Since they don't give you hangers in prison you have to dislocate your finger in order to reach the buttons" +
-			"*SNAP!* Without making a sound a tears running down your face, you tap the buttons and hear a click!" +
+			"Since you found the wire, you can easily reach the buttons! \n" +
+			"*CLICK!* the door clicks open! " +
 			"Press O to open or " + 
 			"R to return to roam your cell.\n\n";
 		if (Input.GetKeyDown (KeyCode.O))     	{myState = States.freedom;}
 		else if (Input.GetKeyDown (KeyCode.R))      {myState = States.cell_mirror;}
+	}
+	void state_freedom ()
+	{
+		text.text =  "You escaped just in time! " +
+			"Press G to go back in! Elfs love challanges! ";
+		if (Input.GetKeyDown (KeyCode.O))     	{myState = States.cell;}
 	}
 
 
