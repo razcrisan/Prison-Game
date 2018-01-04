@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
@@ -134,7 +134,7 @@ public class TextController : MonoBehaviour {
 	void state_freedom ()
 	{
 		text.text =  "You escaped just in time! " +
-			"Press G to go back in! Elfs love challanges! ";
+			"Press G to go back in! Elfs love challanges!!! ";
 		if (Input.GetKeyDown (KeyCode.O))     	{myState = States.cell;}
 	}
 
