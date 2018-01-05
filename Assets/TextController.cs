@@ -160,22 +160,24 @@ public class TextController : MonoBehaviour {
 	}
 	void corridor_1 ()
 	{
-		text.text =  "You managed to get out, the corridor looks empty and it's actually terribly cold." + 
-			"Much much colder than the cell. Very wierd... " +
-			"Press G to go back in! Elfs love challanges! ";
-		if 		(Input.GetKeyDown (KeyCode.O))     	{myState = States.cell;}
+		text.text =  "Still in the corridor but the footsteps subsided. Hairclipo in hand. " + 
+			"But it keeps getting colder! I can see my breath! What is going on!? " +
+			"Maybe the janitors closet would succomb to some lockpicking? Elfs are experts of course. " +
+			"Press P to pick the lock and S to climb the stairs ";
+		if 		(Input.GetKeyDown (KeyCode.P))     	{myState = States.in_closet;}
+		else if (Input.GetKeyDown (KeyCode.S))     	{myState = States.stairs_1;}
 	}
 	void corridor_2 ()
 	{
-		text.text =  "You managed to get out, the corridor looks empty and it's actually terribly cold." + 
-			"Much much colder than the cell. Very wierd... " +
-			"Press G to go back in! Elfs love challanges! ";
-		if 		(Input.GetKeyDown (KeyCode.O))     	{myState = States.cell;}
+		text.text =  "Back in the now freezing corridor, having declined to dress up as the janitor for some reason..." + 
+			"Press C to revisit the Closet, and S to climb back up the stairs. ";
+		if 		(Input.GetKeyDown (KeyCode.C))     	{myState = States.in_closet;}
+		else if (Input.GetKeyDown (KeyCode.S))		{myState = States.stairs_2;}
 	}
 
 	void corridor_3 ()
 	{
-		text.text =  "You managed to get out, the corridor looks empty and it's actually terribly cold." + 
+		text.text =  "You're standing back in" + 
 			"Much much colder than the cell. Very wierd... " +
 			"Press G to go back in! Elfs love challanges! ";
 		if 		(Input.GetKeyDown (KeyCode.O))     	{myState = States.cell;}
@@ -215,6 +217,16 @@ public class TextController : MonoBehaviour {
 			"Press P to play again! ";
 		if 		(Input.GetKeyDown (KeyCode.P))     	{myState = States.cell;}
 	}
+
+	void floor ()
+	{
+		text.text =  "You hear a guards footsteps echoing from up above! The guards footsteps start increasing in volume, " +
+		"getting louder and louder in each step, " +
+		"You really start to panic! You start rummaging around the dirty floor, you find a paperclip! " +
+		"Press H to take the paperclip.";
+		if 		(Input.GetKeyDown (KeyCode.H))     	{myState = States.corridor_1;}
+	}
+
 
 
 
