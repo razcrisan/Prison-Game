@@ -34,7 +34,18 @@ public class TextController : MonoBehaviour {
 		else if (myState == States.wall)		{wall();}
 		else if (myState == States.cell_mirror)	{cell_mirror();}
 		else if (myState == States.corridor_0) 	{corridor_0();}
-	}
+		else if (myState == States.corridor_0) 	{corridor_1();}
+		else if (myState == States.corridor_0) 	{corridor_2();}
+		else if (myState == States.corridor_0) 	{corridor_3();}
+		else if (myState == States.stairs_0) 	{stairs_0();}
+		else if (myState == States.stairs_0) 	{stairs_1();}
+		else if (myState == States.stairs_0) 	{stairs_2();}
+		else if (myState == States.floor) 		{floor();}
+		else if (myState == States.closet_door) {closet_door();}
+		else if (myState == States.in_closet) 	{in_closet();}
+		else if (myState == States.courtyard) 	{courtyard();}
+
+	}	
 
 	void cell ()
 	{
@@ -47,7 +58,7 @@ public class TextController : MonoBehaviour {
 			"'M' to look at Mirror. " +
 			"'L' to look at Lock. " +
 			"Press 'R' to return to your cell";
-		if (Input.GetKeyDown (KeyCode.S)) 		{myState = States.sheets_0;}
+		if 		(Input.GetKeyDown (KeyCode.S)) 		{myState = States.sheets_0;}
 		else if (Input.GetKeyDown (KeyCode.M)) 		{myState = States.mirror;}
 		else if (Input.GetKeyDown (KeyCode.L)) 		{myState = States.lock_0;}
 		else if (Input.GetKeyDown (KeyCode.R)) 		{myState = States.cell;}
@@ -59,7 +70,7 @@ public class TextController : MonoBehaviour {
 			"'T' to take mirror " +
 			"'W' to check wall behind mirror " +
 			"Press 'R' to return to cell";
-		if (Input.GetKeyDown (KeyCode.R)) 		{myState = States.cell;}
+		if 		(Input.GetKeyDown (KeyCode.R)) 		{myState = States.cell;}
 		else if (Input.GetKeyDown (KeyCode.W)) 		{myState = States.wall;}
 		else if (Input.GetKeyDown (KeyCode.T)) 		{myState = States.cell_mirror;}
 	}
@@ -71,7 +82,7 @@ public class TextController : MonoBehaviour {
 			"Elf should thing carefull on their next move... " +
 			"'L' to look at Lock. " +
 			"Press 'R' to return to cell";
-		if (Input.GetKeyDown (KeyCode.L)) 		{myState = States.lock_2;}
+		if 		(Input.GetKeyDown (KeyCode.L)) 	{myState = States.lock_2;}
 		else if (Input.GetKeyDown (KeyCode.R)) 	{myState = States.cell;}
 	
 	}
@@ -82,7 +93,7 @@ public class TextController : MonoBehaviour {
 			"'L' to look at Lock. " +
 			"S to look at sheets." +
 			"Press 'R' to return to cell";
-		if (Input.GetKeyDown(KeyCode.L))   {myState = States.lock_1;}
+		if 		(Input.GetKeyDown(KeyCode.L))   {myState = States.lock_1;}
 		else if (Input.GetKeyDown (KeyCode.R)) 	{myState = States.cell;}
 		else if (Input.GetKeyDown (KeyCode.S)) 	{myState = States.sheets_1;}
 	}
@@ -121,7 +132,7 @@ public class TextController : MonoBehaviour {
 			"\n*SNAP!* Without making a sound and tears running down your face, you tap the buttons and hear a click!" +
 			"\nPress O to open the lock or " + 
 			"M to look at yourself in the mirror.\n\n";
-		if (Input.GetKeyDown (KeyCode.O))     	{myState = States.corridor_0;}
+		if 		(Input.GetKeyDown (KeyCode.O))     	{myState = States.corridor_0;}
 		else if (Input.GetKeyDown (KeyCode.M))      {myState = States.cell_mirror;}
 	}
 
@@ -134,7 +145,7 @@ public class TextController : MonoBehaviour {
 			"*CLICK!* the door clicks open! " +
 			"Press O to open or " + 
 			"R to return to roam your cell.\n\n";
-		if (Input.GetKeyDown (KeyCode.O))     	{myState = States.corridor_0;}
+		if 		(Input.GetKeyDown (KeyCode.O))     	{myState = States.corridor_0;}
 		else if (Input.GetKeyDown (KeyCode.R))      {myState = States.cell_mirror;}
 	}
 
@@ -142,8 +153,67 @@ public class TextController : MonoBehaviour {
 	{
 		text.text =  "You managed to get out, the corridor looks empty and it's actually terribly cold." + 
 			"Much much colder than the cell. Very wierd... " +
+			"Press S to go up the stairs towards the light. " +
+			"Press J to keep going down the long dark hallway.";
+		if 		(Input.GetKeyDown (KeyCode.S))     	{myState = States.stairs_0;}
+		else if (Input.GetKeyDown (KeyCode.J))     	{myState = States.corridor_1;}
+	}
+	void corridor_1 ()
+	{
+		text.text =  "You managed to get out, the corridor looks empty and it's actually terribly cold." + 
+			"Much much colder than the cell. Very wierd... " +
 			"Press G to go back in! Elfs love challanges! ";
-		if (Input.GetKeyDown (KeyCode.O))     	{myState = States.cell;}
+		if 		(Input.GetKeyDown (KeyCode.O))     	{myState = States.cell;}
+	}
+	void corridor_2 ()
+	{
+		text.text =  "You managed to get out, the corridor looks empty and it's actually terribly cold." + 
+			"Much much colder than the cell. Very wierd... " +
+			"Press G to go back in! Elfs love challanges! ";
+		if 		(Input.GetKeyDown (KeyCode.O))     	{myState = States.cell;}
+	}
+
+	void corridor_3 ()
+	{
+		text.text =  "You managed to get out, the corridor looks empty and it's actually terribly cold." + 
+			"Much much colder than the cell. Very wierd... " +
+			"Press G to go back in! Elfs love challanges! ";
+		if 		(Input.GetKeyDown (KeyCode.O))     	{myState = States.cell;}
+	}
+
+	void stairs_0 ()
+	{
+		text.text =  "You start walking up the stairs towards the outside light. " +
+			"You look realize its not yet break time, and you'll be caught immediately. " +
+			"You quickly go back down the stairs by your cell and reconsider. " +
+			"Press R to return back to the corridor ";
+		if 		(Input.GetKeyDown (KeyCode.R))     	{myState = States.corridor_0;}
+	}
+
+	void stairs_1 ()
+	{
+		text.text =  "Unfortunately wielding a puny paperclip doesn't give you the confidence fight off the armed guards. " +
+			"If only the the wire didnt break while picking you cell lock... " +
+			"Press R to retreat down the stairs ";
+		if 		(Input.GetKeyDown (KeyCode.R))     	{myState = States.corridor_1;}
+	}
+
+	void stairs_2 ()
+	{
+		text.text =  "Your confidence is at an all time high despite still being in prison. " +
+			"You broke out of your cell and managed to pick the janitors closet open. " +
+			"You still have the paperclip so it's not enough to fight the human guards, maybe theres something in here... " +
+			"Press R to go back out corridor ";
+		if 		(Input.GetKeyDown (KeyCode.R))     	{myState = States.corridor_2;}
+	}
+
+	void courtyard ()
+	{
+		text.text =  "You walk out into the courtyard looking smug dressed as the janitor. " +
+			"One of the guards tips his hat as you walk by, another cat calls? " +
+			"You quickly pick up the pace now, sweating profusely the sunset is right there. and just in time for supper! :D " +
+			"Press P to play again! ";
+		if 		(Input.GetKeyDown (KeyCode.P))     	{myState = States.cell;}
 	}
 
 
