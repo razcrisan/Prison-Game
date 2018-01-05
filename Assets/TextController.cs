@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
@@ -226,6 +226,7 @@ public class TextController : MonoBehaviour {
 		"Press H to take the paperclip.";
 		if 		(Input.GetKeyDown (KeyCode.H))     	{myState = States.corridor_1;}
 	}
+
 
 
 
