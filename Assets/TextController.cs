@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,6 +46,23 @@ public class TextController : MonoBehaviour {
 		else if (myState == States.courtyard) 	{courtyard();}
 
 	}	
+
+	void in_closet ()
+	{
+		text.text =  "Once inside the closet you see a cleaner's uniform that looks like it could fit! " + 
+			"Seems like your day is looking up! \n\n " +
+			"Press D to Dress up, or R to Return to the corridor. ";
+		if 		(Input.GetKeyDown (KeyCode.D))     	{myState = States.corridor_3;}
+		else if (Input.GetKeyDown (KeyCode.R)) 		{myState = States.corridor_2;}
+	}
+
+	void closet_door ()
+	{
+		text.text =  "You are looking at the janitors closet door, unfortunately it's locked. " + 
+			"Maybe you could find something around to pick lock the door with. " +
+			"Press R to revisit the Closet, and S to climb back up the stairs. ";
+		if 		(Input.GetKeyDown (KeyCode.R))     	{myState = States.corridor_0;}
+	}
 
 	void cell ()
 	{
@@ -106,6 +123,7 @@ public class TextController : MonoBehaviour {
 			"Press R to return to roam your cell.\n\n";
 		if (Input.GetKeyDown (KeyCode.R)) 		{myState = States.cell;}
 	}
+
 	void sheets_1 ()
 	{
 		text.text =  "Holding a mirror in your hand you notice the cut from when you tried to run away from the human" +
@@ -153,11 +171,16 @@ public class TextController : MonoBehaviour {
 	{
 		text.text =  "You managed to get out, the corridor looks empty and it's actually terribly cold." + 
 			"Much much colder than the cell. Very wierd... " +
+			"Theres a closet and some stairs leading to the courtyard. " +
+			"Looking closely, you can see some junk on the floor. \n" +
 			"Press S to go up the stairs towards the light. " +
-			"Press J to keep going down the long dark hallway.";
+			"Press F to inspect the floor. "+
+			"Or C to inspect the closet.";
 		if 		(Input.GetKeyDown (KeyCode.S))     	{myState = States.stairs_0;}
-		else if (Input.GetKeyDown (KeyCode.J))     	{myState = States.corridor_1;}
+		else if (Input.GetKeyDown (KeyCode.F))     	{myState = States.floor;}
+		else if (Input.GetKeyDown (KeyCode.C))     	{myState = States.closet_door;}
 	}
+
 	void corridor_1 ()
 	{
 		text.text =  "Still in the corridor but the footsteps subsided. Hairclipo in hand. " + 
@@ -167,6 +190,7 @@ public class TextController : MonoBehaviour {
 		if 		(Input.GetKeyDown (KeyCode.P))     	{myState = States.in_closet;}
 		else if (Input.GetKeyDown (KeyCode.S))     	{myState = States.stairs_1;}
 	}
+
 	void corridor_2 ()
 	{
 		text.text =  "Back in the now freezing corridor, having declined to dress up as the janitor for some reason..." + 
@@ -177,10 +201,12 @@ public class TextController : MonoBehaviour {
 
 	void corridor_3 ()
 	{
-		text.text =  "You're standing back in" + 
-			"Much much colder than the cell. Very wierd... " +
-			"Press G to go back in! Elfs love challanges! ";
-		if 		(Input.GetKeyDown (KeyCode.O))     	{myState = States.cell;}
+		text.text =  "You're standing back in the corridor, now convincingly dressed as a cleaner. " + 
+			"It still doesn't help the freezing temperatures... Is this hell? " +
+			"You can't wait to escape. However, you know you must stay calm heading out. " +
+			"Press S to go back up the stairs, or U to take the janitors clothes off. ";
+		if 		(Input.GetKeyDown (KeyCode.S))     	{myState = States.courtyard;}
+		else if (Input.GetKeyDown (KeyCode.U))		{myState = States.in_closet;}
 	}
 
 	void stairs_0 ()
@@ -226,7 +252,6 @@ public class TextController : MonoBehaviour {
 		"Press H to take the paperclip.";
 		if 		(Input.GetKeyDown (KeyCode.H))     	{myState = States.corridor_1;}
 	}
-
 
 
 
