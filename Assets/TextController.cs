@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +6,7 @@ using UnityEngine;
 public class TextController : MonoBehaviour {
 
 	public Text text;
+
 
 	private enum States {
 	cell,wall, mirror, sheets_0, lock_0, cell_mirror, sheets_1, lock_1, lock_2, corridor_0, corridor_1, corridor_2, corridor_3,
@@ -248,9 +249,9 @@ public class TextController : MonoBehaviour {
 
 	void courtyard ()
 	{
-		text.text =  "You walk out into the courtyard looking smug dressed as the janitor. " +
-			"One of the guards tips his hat as you walk by, another cat calls? " +
-			"You quickly pick up the pace now, sweating profusely the sunset is right there. and just in time for supper! :D \n\n" +
+		text.text =  "You walk out into the courtyard looking smug because you're about to fool these humans so easily. " +
+			"One of the guards tips his hat as you walk by, another cat calls? erhm... ??? " +
+			"You quickly pick up the pace now, sweating profusely, the exit is right there. and just in time for supper! :D \n\n" +
 			"Press P to play again! ";
 		if 		(Input.GetKeyDown (KeyCode.P))     	{myState = States.cell;}
 	}
