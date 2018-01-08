@@ -50,7 +50,7 @@ public class TextController : MonoBehaviour {
 
 	void in_closet ()
 	{
-		text.text =  "Once inside the closet you see a cleaner's uniform that looks like it could fit! " + 
+		text.text =  "Once inside the closet you see a janitor's uniform that looks like it could fit! " + 
 			"Seems like your day is looking up! \n\n " +
 			"Press D to Dress up, or R to Return to the corridor. ";
 		if 		(Input.GetKeyDown (KeyCode.D))     	{myState = States.corridor_3;}
