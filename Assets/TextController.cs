@@ -198,6 +198,7 @@ public class TextController : MonoBehaviour {
 			"Press C to revisit the Closet, and S to climb back up the stairs. ";
 		if 		(Input.GetKeyDown (KeyCode.C))     	{myState = States.in_closet;}
 		else if (Input.GetKeyDown (KeyCode.S))		{myState = States.stairs_2;}
+else if (Input.GetKeyDown (KeyCode.J))		{myState = States.stairs_0;}
 	}
 
 	void corridor_3 ()
